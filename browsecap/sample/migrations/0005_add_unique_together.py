@@ -1,7 +1,7 @@
 
 from south.db import db
 from django.db import models
-from djangobaselibrary.sample.models import *
+from browsecap.sample.models import *
 
 class Migration:
     def forwards(self, orm):
