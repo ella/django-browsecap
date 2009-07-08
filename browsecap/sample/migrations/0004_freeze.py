@@ -1,11 +1,11 @@
 
 from south.db import db
 from django.db import models
-from djangobaselibrary.sample.models import *
+from browsecap.sample.models import *
 
 '''
 created via:
-./djangobaseproject/manage.py startmigration sample freeze --freeze sample
+./proj/manage.py startmigration sample freeze --freeze sample
 '''
 
 class Migration:
