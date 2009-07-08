@@ -1,28 +1,27 @@
 from setuptools import setup, find_packages
 import browsecap
 
-# all fields marked with TODO: REPLACE
-# must be filled with some meanigful values
-
-VERSION = (0, 0, 0)
+VERSION = (0, 1, 0, 0)
 __version__ = VERSION
 __versionstr__ = '.'.join(map(str, VERSION))
 
 setup(
     name = 'browsecap',
     version = __versionstr__,
-    description = 'Django Base Library', # TODO: REPLACE
+    description = 'Django Base Library',
     long_description = '\n'.join((
-        'Django Base Library',
+        'Django browsecap',
         '',
-        'this project (python module) is meant as a template',
-        'for any centrumholdings django based',
-        '(even non-django, pure python) libraries',
+        'helper module to process browseap.ini',
+        'designed mainly to detect mobile browsers and crawlers.',
+        '',
+        'Based Heavily on django snippet 267',
+        'Thanks!',
     )),
-    author = 'centrum holdings s.r.o', # TODO: REPLACE
-    author_email='devel@centrumholdings.com', # TODO: REPLACE
-    license = 'BSD', # TODO: REPLACE
-    url='http://git.netcentrum.cz/projects/django/GIT/django-base-library.git/', # TODO: REPLACE
+    author = 'centrum holdings s.r.o',
+    author_email='devel@centrumholdings.com',
+    license = 'BSD',
+    url='http://git.netcentrum.cz/projects/django/GIT/django-base-library.git/',
 
     packages = find_packages(
         where = '.',
@@ -31,7 +30,6 @@ setup(
 
     include_package_data = True,
 
-    # TODO: REPLACE
     classifiers=[
         "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
