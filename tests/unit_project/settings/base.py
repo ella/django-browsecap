@@ -37,7 +37,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 INSTALLED_APPS = (
-    'browsecap.sample',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
