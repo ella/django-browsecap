@@ -24,7 +24,7 @@ class MobileBrowserParser(object):
         data = cache.get(CACHE_KEY)
         if data:
             self.mobile_browsers = map(re.compile, data['mobile_browsers'])
-            self.crawlesr = map(re.compile, data['crawlers'])
+            self.crawlers = map(re.compile, data['crawlers'])
             return
 
         cfg = ConfigParser()
