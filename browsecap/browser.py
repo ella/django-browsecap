@@ -50,26 +50,28 @@ class MobileBrowserParser(object):
         self.mobile_browsers = []
         self.crawlers = []
         for name, conf in browsers.items():
-            # only process those that are not parents - not abstract
-            if name not in parents:
-                p = conf.get('parent')
-                if p:
-                    # update config based on parent's settings
-                    parent = browsers[p]
-                    conf.update(parent)
+            # only process those that are not abstract parents
+            if name in parents:
+                continue
 
-                # we only care for mobiles and crawlers
-                if conf.get('ismobiledevice', 'false') == 'true' or conf.get('crawler', 'false') == 'true':
-                    qname = re.escape(name)
-                    qname = qname.replace("\\?", ".").replace("\\*", ".*?")
-                    qname = "^%s$" % qname
+            p = conf.get('parent')
+            if p:
+                # update config based on parent's settings
+                parent = browsers[p]
+                conf.update(parent)
 
-                # register the user agent
-                if conf.get('ismobiledevice', 'false') == 'true':
-                    self.mobile_browsers.append(qname)
+            # we only care for mobiles and crawlers
+            if conf.get('ismobiledevice', 'false') == 'true' or conf.get('crawler', 'false') == 'true':
+                qname = re.escape(name)
+                qname = qname.replace("\\?", ".").replace("\\*", ".*?")
+                qname = "^%s$" % qname
 
-                if conf.get('crawler', 'false') == 'true':
-                    self.crawlers.append(qname)
+            # register the user agent
+            if conf.get('ismobiledevice', 'false') == 'true':
+                self.mobile_browsers.append(qname)
+
+            if conf.get('crawler', 'false') == 'true':
+                self.crawlers.append(qname)
 
         # store in cache to speed up next load
         cache.set(CACHE_KEY, {'mobile_browsers': self.mobile_browsers, 'crawlers': self.crawlers}, CACHE_TIMEOUT)
