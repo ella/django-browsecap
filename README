@@ -17,7 +17,8 @@ all mobile users to alternate domain.
 
 To use just add `browsecap.middleware.MobileRedirectMiddleware` to your
 `settings.MIDDLEWARE_CLASSES` and define a `MOBILE_DOMAIN` that you want your
-mobile users redirected to.
+mobile users redirected to. Note that the value must contain full path
+including the protocol (http://)
 
 The middleware sets ismobile cookie to value 1 and can be overriden by deleting
 that cookie setting isbrowser cookie to 1.
