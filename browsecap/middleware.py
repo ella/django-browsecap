@@ -28,8 +28,11 @@ class MobileRedirectMiddleware(object):
                     is_mobile(request.META['HTTP_USER_AGENT'])
                 )
             ):
+            redirect = settings.MOBILE_DOMAIN
+            if getattr(settings, 'MOBILE_REDIRECT_PRESERVE_URL', False):
+                redirect = redirect.rstrip('/') + request.path_info
             # redirect to mobile domain
-            response = HttpResponseRedirect(settings.MOBILE_DOMAIN)
+            response = HttpResponseRedirect(redirect)
 
             # set cookie to identify the browser as mobile
             max_age = getattr(settings, 'MOBILE_COOKIE_MAX_AGE', DEFAULT_COOKIE_MAX_AGE)

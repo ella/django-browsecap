@@ -22,6 +22,11 @@ class TestMobileRedirectMiddleware(UnitTestCase):
         settings.MOBILE_DOMAIN = 'http://mobile.example.com/'
         self.middleware = MobileRedirectMiddleware()
 
+    def tearDown(self):
+        super(TestMobileRedirectMiddleware, self).tearDown()
+        if hasattr(settings, 'MOBILE_REDIRECT_PRESERVE_URL'):
+            del settings.MOBILE_REDIRECT_PRESERVE_URL
+
     def test_does_nothing_if_mobile_domain_not_set(self):
         settings.MOBILE_DOMAIN = None
         response = self.middleware.process_request(build_request('Mozilla/5.0 (PLAYSTATION 3; 1.00)'))
@@ -48,3 +53,11 @@ class TestMobileRedirectMiddleware(UnitTestCase):
         response = self.middleware.process_request(build_request(cookies={'ismobile': '1'}))
         self.assert_true(isinstance(response, HttpResponseRedirect))
         self.assert_equals(settings.MOBILE_DOMAIN, response['Location'])
+
+    def test_redirects_if_ismobile_cookie_set(self):
+        settings.MOBILE_REDIRECT_PRESERVE_URL = True
+        request = build_request(cookies={'ismobile': '1'})
+        request.path_info = '/some/url/'
+        response = self.middleware.process_request(request)
+        self.assert_true(isinstance(response, HttpResponseRedirect))
+        self.assert_equals(settings.MOBILE_DOMAIN + 'some/url/', response['Location'])
