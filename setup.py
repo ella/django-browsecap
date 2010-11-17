@@ -21,7 +21,7 @@ setup(
     author = 'centrum holdings s.r.o',
     author_email='devel@centrumholdings.com',
     license = 'BSD',
-    url='http://git.netcentrum.cz/projects/django/GIT/django-base-library.git/',
+    url='http://www.github.com/ella/django-browsecap',
 
     packages = find_packages(
         where = '.',
