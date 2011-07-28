@@ -39,6 +39,9 @@ somewhat slow (under a second on a laptop) is parsing the browscap.ini file.
 This is done only when the module is first loaded and stores it's results in
 cache so that start of the next thread/process should not be hindered.
 
+You can provide your own browscap.ini file by setting `BROWSCAP_DIR` in django
+settings pointing to a directory containing the file.
+
 Credits
 -------
 It is based on henning's snippet #267 -
