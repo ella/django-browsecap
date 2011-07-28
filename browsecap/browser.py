@@ -3,10 +3,11 @@ import re
 import os
 
 from django.core.cache import cache
+from django.conf import settings
 
 CACHE_KEY = 'browsecap'
 CACHE_TIMEOUT = 60*60*2 # 2 hours
-BC_PATH = os.path.abspath(os.path.dirname(__file__ or os.getcwd()))
+DEFAULT_BC_PATH = os.path.abspath(os.path.dirname(__file__ or os.getcwd()))
 
 class MobileBrowserParser(object):
     def __new__(cls, *args, **kwargs):
@@ -31,7 +32,8 @@ class MobileBrowserParser(object):
         # parse browscap.ini
         cfg = ConfigParser()
         files = ("browscap.ini", "bupdate.ini")
-        read_ok = cfg.read([os.path.join(BC_PATH, name) for name in files])
+        base_path = getattr(settings, 'BROWSCAP_DIR', DEFAULT_BC_PATH)
+        read_ok = cfg.read([os.path.join(base_path, name) for name in files])
         if len(read_ok) == 0:
             raise IOError, "Could not read browscap.ini, " + \
                   "please get it from http://www.GaryKeith.com"
