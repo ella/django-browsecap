@@ -1,3 +1,5 @@
+/browsecap.egg-info/
+
 *.py[co]
 .*.sw?
 *~
